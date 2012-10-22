@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include "node.h"
 #include "queue.h"
+#include "stack.h"
 
 int main(int argc, char* argv[])
 {
@@ -48,6 +49,30 @@ int main(int argc, char* argv[])
 	destroy_queue(q);
 	printf("\r\n---\r\n");
 
+	printf("Building a stack, adding 10000 nodes. Printing out every 1000\r\n");
+	stack * s = build_stack();
+
+	for (i = 0; i < 10000 ; i++)
+	{
+		int data = i;
+		node * n = build_node(&data);
+		stack_push(s, n);
+	}
+	printf("Stack has the size %d\r\n", s->size);
+
+	for (i = 0; i < 10000 ; i++)
+	{
+		node * n = stack_pop(s);
+		if((i%1000)==0)
+		{
+			printf("Node has the data %d\r\n", *(int*)n->data);
+		}
+		destroy_node(n);
+	}
+	printf("Queue has the size %d\r\n", s->size);
+
+	destroy_stack(s);
+	printf("\r\n---\r\n");
 
 	return 0;
 }
