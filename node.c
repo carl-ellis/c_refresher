@@ -4,7 +4,8 @@
 
 
 /* returns a node given some data. Allocated in the method. */
-node * build_node(void * data){
+node * build_node(void * data)
+{
 
   /* allocate node memory */
   node * node_ptr = (node*)malloc(sizeof(node));
