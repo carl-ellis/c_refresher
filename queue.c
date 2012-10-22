@@ -7,8 +7,8 @@
 /* returns an empty queue. */
 queue * build_queue()
 {
-  /* allocate queue memory */
-  queue * q = (queue*)malloc(sizeof(queue));
+	/* allocate queue memory */
+	queue * q = (queue*)malloc(sizeof(queue));
 
 	/* initial values */
 	q->front = 0x00;
@@ -32,7 +32,7 @@ void destroy_queue(queue * q)
 void queue_push(queue * q, node * n)
 {
 	/* if queue is empty */
-  if(q->front == 0x00)
+	if(q->front == 0x00)
 	{
 		q->front = n;
 		q->back = n;
@@ -41,7 +41,7 @@ void queue_push(queue * q, node * n)
 	{
 
 		/* Sanity check */
-	 	if(q->back == 0x00)
+		if(q->back == 0x00)
 		{
 			printf("[Queue]:: Error. Back pointer is null in a non-empty queue.\r\n");
 		}
@@ -63,13 +63,13 @@ node * queue_pop(queue * q)
 	{
 		return 0x00;
 	}
-	
+
 	/* Pop Node from the front */
 	node * n = q->front;
 
 	/* adjust size */
 	q->size--;
-	
+
 	/*Check if queue is now empty */
 	if(q->size == 0)
 	{

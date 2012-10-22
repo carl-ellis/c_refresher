@@ -3,9 +3,9 @@
 
 /* structure of a node for use by queues and stacks */
 typedef struct node_t {
-  struct node_t * next;
-  int size;
-  void * data;
+	struct node_t * next;
+	int size;
+	void * data;
 } node;
 
 /* returns a node given some data. Allocated in the method. */
