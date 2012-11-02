@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 		}
 		destroy_node(n);
 	}
-	printf("Queue has the size %d\r\n", s->size);
+	printf("Stack has the size %d\r\n", s->size);
 
 	destroy_stack(s);
 	printf("\r\n---\r\n");

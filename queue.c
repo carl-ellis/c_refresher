@@ -23,7 +23,7 @@ void destroy_queue(queue * q)
 	/* Make sure to clear any data still in the queue */
 	while(q->size > 0)
 	{
-		free(queue_pop(q));
+		destroy_node(queue_pop(q));
 	}
 	free(q);
 }
