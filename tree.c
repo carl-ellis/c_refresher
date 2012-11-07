@@ -44,7 +44,7 @@ void add_leaf(tree ** root, tree * leaf, tree_comp_func cfunc)
 	}
 	
 	/* Otherwise traverse the tree until a null node is found */
-	if((*cfunc)(*root, leaf) == 0)
+	if((*cfunc)(*root, leaf) < 1)
 	{
 		add_leaf(&((*root)->left), leaf, cfunc);
 	}
@@ -53,4 +53,73 @@ void add_leaf(tree ** root, tree * leaf, tree_comp_func cfunc)
 		add_leaf(&((*root)->right), leaf, cfunc);
 	}
 	
+}
+
+/* removes a tree node */
+void delete_node(tree ** node)
+{
+	/* number of children */
+	char num_child;
+	
+ 	/* If node is null, ignore */
+ 	if (*node == 0x00)
+ 	{
+	 return;
+	}
+ 
+ 	/* Count children, not having a simple count allows encoding which branch is used in the value */
+ 	num_child = 0;
+ 	if ((*node)->right != 0x00)
+ 	{
+ 		num_child+=1;
+ 	}
+ 	if ((*node)->left != 0x00)
+ 	{
+ 		num_child+=2;
+ 	}
+ 	
+  /* If node has no children, just remove */
+  if (num_child == 0)
+  {
+  	destroy_tree(*node);
+  	*node = 0x00;
+  }
+  /* If node has 1 child branch, just connect to the parent of root */
+  else if (num_child == 1)
+  {
+  	tree * to_del = *node;
+  	*node = (*node)->right;
+  	destroy_tree(to_del);
+  }
+  else if (num_child == 2)
+  {
+  	tree * to_del = *node;
+  	*node = (*node)->left;
+  	destroy_tree(to_del);
+  }
+  /* Otherwise the tree has two children. To keep the binary tree fairly sane, 
+	just shift the nodes suceessor (first child of greater branch to the nodes 
+	position) to the current nodes position and delete the original successor. 
+	Recursion will bubble values up until a single/nochildren node is found to 
+	end the calls */
+  else
+  {
+ 	
+  	/* manually free the data from the node being deleted as we need to 
+		circumvent the whole node deletion function. No not do this if null, 
+		as we only need to do this on the original node to be deleted. */
+		if((*node)->data != 0x00)
+		{
+			free((*node)->data);
+		}
+		
+		/* Move successor data into current node, wipe successors data to avoid 
+		segfaults */
+		(*node)->size = ((*node)->right)->size;
+		(*node)->data = ((*node)->right)->data;
+		((*node)->right)->data = 0x00;
+		
+		delete_node(&((*node)->right));
+  }
+  return;
 }

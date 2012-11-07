@@ -11,7 +11,7 @@ typedef struct tree_t
 } tree;
 
 /* A comparison function to be used by the add leaf function.
-	 must be of the form a <= b == 0; a > b == 1 */
+	 must be of the form a < b == -1; a==b ==0; a > b == 1 */
 typedef int (*tree_comp_func)(tree *,tree *);
 
 /* returns a node given some data. Allocated in the method. */
@@ -22,5 +22,8 @@ void destroy_tree(tree * node_data);
 
 /* adds leaf nodes to a tree using a given comparison function */
 void add_leaf(tree ** root, tree * leaf, tree_comp_func cfunc);
+
+/* removes a tree node */
+void delete_node(tree ** node);
 
 #endif
