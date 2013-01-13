@@ -1,3 +1,13 @@
+/* This takes an array of numbers (in the example, {1,2,3,4,5,6,7,8,9,10,11,12,13,14}
+  and parititions them into k bins so that each bin holds roughly the same VALUE rather
+  than the same number of items. Uses dynamic programming and bad spelling. 
+  
+  This technique is handy for parallelisation as if you have an easily split up process
+  which loops over 10000 items, it may take longer to do the the last 1000 items compared
+  to the first 5000. If you can work this out before hand an algorithm like this allows for
+  efficient load balancing - especially if using a cluster based machine which will only
+  return a job when ALL subparts have finished processing */
+
 #include<stdlib.h>
 #include<stdio.h>
 
