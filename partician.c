@@ -14,6 +14,9 @@ void partician(int s[], int n, int k)
 {
 	int m[MAXN+1][MAXK+1];  /* DP table for values */
 	int d[MAXN+1][MAXK+1];  /* DP table for dividers*/
+	int p[MAXN+1];						/* Prefix sums array */
+	int cost;								/* Test split costs */
+	int i,j,x;							/* counters */
 	int p[MAXN+1];          /* Prefix sums array */
 	int cost;               /* Test split costs */
 	int i,j,x;              /* counters */
